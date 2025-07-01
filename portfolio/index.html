@@ -5,6 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>My Portfolio</title>
   <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap" rel="stylesheet">
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
   <style>
     body {
       margin: 0;
@@ -35,6 +36,7 @@
       margin-bottom: 10px;
       border-bottom: 2px solid #00adb5;
       display: inline-block;
+      cursor: pointer;
     }
     .card {
       background: #2e2e3e;
@@ -81,7 +83,6 @@
       font-size: 0.9em;
       color: #aaa;
     }
-
   </style>
 </head>
 <body>
@@ -93,7 +94,7 @@
   <section>
     <h2>自己紹介</h2>
     <div class="card">
-      <img src="/profile.jpg" alt="プロフィール画像" class="profile">
+      <img src="images/profile.png" alt="プロフィール画像" class="profile">
       <p>システムエンジニアを目指して日々勉強しています。現在は主にWeb開発とプログラミングの基礎（C言語・Java・Pythonなど）を学んでいます。将来は日常生活をちょっとだけ快適にできるような、人に寄り添うアプリを開発するのが目標です。</p>
     </div>
 
@@ -104,7 +105,7 @@
         <li>Java / C言語 / Python</li>
         <li>Git / GitHub</li>
         <li>所持資格：ITパスポート</li>
-		<p>基本情報技術者・情報セキュリティマネジメント受験予定</p>
+        <p>基本情報技術者・情報セキュリティマネジメント受験予定</p>
       </ul>
     </div>
 
@@ -116,7 +117,6 @@
       <div class="skill"><p>C言語</p><div class="bar"><div class="fill" style="width: 50%;"></div></div></div>
       <div class="skill"><p>Python</p><div class="bar"><div class="fill" style="width: 65%;"></div></div></div>
     </div>
-
 
     <h2>作品</h2>
     <div class="card">
@@ -135,6 +135,11 @@
       <button onclick="calc('*')">×</button>
       <button onclick="calc('/')">÷</button>
       <p id="result">答え：---</p>
+    </div>
+
+    <h2 onclick="toggleChart()">📊 勉強時間グラフ（クリックで表示）</h2>
+    <div class="card" id="chartSection" style="display:none;">
+      <canvas id="studyChart" width="400" height="300"></canvas>
     </div>
 
     <h2>Contact</h2>
@@ -167,6 +172,40 @@
         else if (op === '*') result = num1 * num2;
         else if (op === '/') result = num2 !== 0 ? num1 / num2 : 'エラー（0で割れません）';
         document.getElementById('result').textContent = '答え：' + result;
+      }
+    }
+
+    function toggleChart() {
+      const chartSection = document.getElementById('chartSection');
+      if (chartSection.style.display === 'none') {
+        chartSection.style.display = 'block';
+        if (!window.studyChart) {
+          const ctx = document.getElementById('studyChart').getContext('2d');
+          window.studyChart = new Chart(ctx, {
+            type: 'bar',
+            data: {
+              labels: ['HTML', 'CSS', 'JavaScript', 'Java', 'C言語', 'Python'],
+              datasets: [{
+                label: '勉強時間（時間）',
+                data: [40, 35, 30, 50, 25, 28],
+                backgroundColor: '#00adb5'
+              }]
+            },
+            options: {
+              responsive: true,
+              scales: {
+                y: {
+                  beginAtZero: true,
+                  ticks: {
+                    stepSize: 10
+                  }
+                }
+              }
+            }
+          });
+        }
+      } else {
+        chartSection.style.display = 'none';
       }
     }
   </script>

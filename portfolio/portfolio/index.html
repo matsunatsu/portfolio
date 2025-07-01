@@ -95,7 +95,7 @@
     <h2>自己紹介</h2>
     <div class="card">
       <img src="images/profile.png" alt="プロフィール画像" class="profile">
-      <p>システムエンジニアを目指して日々勉強しています。現在は主にWeb開発とプログラミングの基礎（C言語・Java・Pythonなど）を学んでいます。将来は日常生活をちょっとだけ快適にできるような、人に寄り添うアプリを開発するのが目標です。</p>
+      <p>システムエンジニアを目指して日々勉強しています。現在は主にWebアプリ開発とプログラミングの基礎（C言語・Java・Pythonなど）を学んでいます。将来は日常生活をちょっとだけ快適にできるような、人に寄り添うアプリを開発するのが目標です。</p>
     </div>
 
     <h2>スキル・資格</h2>
@@ -137,12 +137,7 @@
       <p id="result">答え：---</p>
     </div>
 
-    <h2 onclick="toggleChart()">📊 勉強時間グラフ（クリックで表示）</h2>
-    <div class="card" id="chartSection" style="display:none;">
-      <canvas id="studyChart" width="400" height="300"></canvas>
-    </div>
-
-    <h2>Contact</h2>
+       <h2>Contact</h2>
     <div class="card">
       <p>GitHub: <a href="https://github.com/matsunatsu" target="_blank" style="color:#00adb5">github.com/matsunatsu</a></p>
     </div>
@@ -175,39 +170,8 @@
       }
     }
 
-    function toggleChart() {
-      const chartSection = document.getElementById('chartSection');
-      if (chartSection.style.display === 'none') {
-        chartSection.style.display = 'block';
-        if (!window.studyChart) {
-          const ctx = document.getElementById('studyChart').getContext('2d');
-          window.studyChart = new Chart(ctx, {
-            type: 'bar',
-            data: {
-              labels: ['HTML', 'CSS', 'JavaScript', 'Java', 'C言語', 'Python'],
-              datasets: [{
-                label: '勉強時間（時間）',
-                data: [40, 35, 30, 50, 25, 28],
-                backgroundColor: '#00adb5'
-              }]
-            },
-            options: {
-              responsive: true,
-              scales: {
-                y: {
-                  beginAtZero: true,
-                  ticks: {
-                    stepSize: 10
-                  }
-                }
-              }
-            }
-          });
-        }
-      } else {
-        chartSection.style.display = 'none';
-      }
-    }
-  </script>
+   </script>
 </body>
 </html>
+
+
